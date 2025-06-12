@@ -14,7 +14,8 @@ spec:
     namespace: postgresql
     name: in-cluster
   syncPolicy:
-    automated: {}
+    automated: 
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=t
