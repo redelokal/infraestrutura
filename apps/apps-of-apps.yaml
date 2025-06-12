@@ -10,4 +10,6 @@ spec:
     path: apps/apps
     repoURL: 'https://github.com/redelokal/infraestrutura'
     targetRevision: HEAD
+    directoy:
+      recurse: true
   project: default
