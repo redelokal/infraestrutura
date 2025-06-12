@@ -11,12 +11,13 @@ spec:
     repoURL: https://movetokube.github.io/postgres-operator
     chart: ext-postgres-operator
     targetRevision: 2.0.0
-    valuesObject:
-      postgres:
-        host: postgresql-01-rw.postgresql.cluster.svc.local
-        user: app
-        password: rwNQnNnO2EacZhETfJ8uNblM805Iyjlf9lJGfal24GJ4wJiaLN4lfEaOccDYovwX
-        default_database: app
+    helm:
+      valuesObject:
+        postgres:
+          host: postgresql-01-rw.postgresql.cluster.svc.local
+          user: app
+          password: rwNQnNnO2EacZhETfJ8uNblM805Iyjlf9lJGfal24GJ4wJiaLN4lfEaOccDYovwX
+          default_database: app
 
   destination:
     namespace: postgres-operator
