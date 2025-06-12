@@ -14,7 +14,7 @@ spec:
     helm:
       valuesObject:
         postgres:
-          host: postgresql-01-rw.postgresql.cluster.svc.local
+          host: postgresql-01-rw.postgresql.svc.cluster.local
           user: app
           password: rwNQnNnO2EacZhETfJ8uNblM805Iyjlf9lJGfal24GJ4wJiaLN4lfEaOccDYovwX
           default_database: app
