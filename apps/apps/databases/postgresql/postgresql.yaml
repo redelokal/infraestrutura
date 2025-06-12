@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: postgresql
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgresql-01
+  namespace: postgresql
+spec:
+  instances: 3
+
+  storage:
+    size: 1Gi
