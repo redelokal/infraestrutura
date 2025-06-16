@@ -58,31 +58,31 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 8080
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: miniflux
-#   namespace: miniflux
-#   annotations:
-#     cert-manager.io/cluster-issuer: letsencrypt-staging
-# spec:
-#   ingressClassName: nginx
-#   tls:
-#   - hosts:
-#     - miniflux.redelokal.com.br
-#     secretName: miniflux-tls
-#   rules:
-#     - host: miniflux.redelokal.com.br
-#       http:
-#         paths:
-#           - path: /
-#             pathType: Prefix
-#             backend:
-#               service:
-#                 name: miniflux
-#                 port:
-#                   number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: miniflux
+  namespace: miniflux
+  # annotations:
+  #   cert-manager.io/cluster-issuer: letsencrypt-staging
+spec:
+  ingressClassName: nginx
+  # tls:
+  # - hosts:
+  #   - miniflux.redelokal.com.br
+  #   secretName: miniflux-tls
+  rules:
+    - host: miniflux.redelokal.com.br
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: miniflux
+                port:
+                  number: 80
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
