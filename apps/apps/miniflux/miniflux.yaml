@@ -20,7 +20,7 @@ spec:
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
-              name: miniflux-db-app
+              name: miniflux-db
               key: uri
         - name: RUN_MIGRATIONS
           value: "1" 
@@ -83,3 +83,39 @@ spec:
 #                 name: miniflux
 #                 port:
 #                   number: 80
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: miniflux-admin
+  namespace: miniflux
+spec:
+  encryptedData:
+    ADMIN_PASSWORD: AgDlkaHXZAENLHZilirRQQCVy+xE8vqW0MXlHGT+egj+wK65DnvBO0uC2DheG/8d8Zykn3Gzq8O8qHuMnj8u14vCjqeFFejq3dh7ouJeTqh5gyZAPgAoRkRFyB/CWBcV/AXT77GZwIiwuRCj9YCtiTA+0SPl5JfOYGk9ZFPFuEkB6luksBYwKEYBjulv608lQnpurNyyiBlAG45kDCZRw0NUoffu12ScMstvR7spH10xigJiu1Ol8R4q5EmIYBGHVO6WNGlvXEMreB3iSbBNi+lb6sO3hO8pwTZbrVH59iThKuzjzjL3bUWSh+CRBnCLMVYVcsh9dL8pt3B+LlJdWaAjh9oDCj65Q4hdSc0ApVmW4VQnyk2LAljIB/VWwEI1aB6jk/mxpIsOpZj9WV1enSQJ0EAh02H7B5hX1S+fLQk8EqrPSeQeIya0J8mpG7zpWa+4hF3fTF1oOlebpPKiqYV3Pq9gv4oIZeRGAzW2nnw2RMp11ro9TrPLEfxNxhMwWxLIkGk9TWWTbXludLlX6yecv+ACIFWCt5KNhR/6pW/lR9qSNWs84NH1f58ERc4XFN9DHsFTtuxmCYUNh595eY4ygq9hySisQpVMmYGSqyEoYCO8HrK6gsgAE8EfziIw3tUHJHZ+MHXFBjMHMKkF39BX69xJfRzwLbR3cCIJzuc6Xb9qg0I4t8BwzQnSuc+/PTDtCZGZoytZEby2cvipYKkqyjid95tj7++11Y2L2owz
+    ADMIN_USERNAME: AgAoR3yaFHEZkK7VIVP+SuSMF1YvSUbFpma8LEdfJ+pfj+OfRpSXLszAeM3VNwljO3bMuKMAag/31y5DZwFBWpY9s0owPzWATAYuXZw1PdHPOxzkRTi3HI6JCpcqwBRLIcIGXm4XozcBGzEwcceyFat8z9ux0oGFk9ySfKWA1GkS9Mrj+3cWQlSQ740FycCoPGCJ8RyIMyJBvEetZmlrnXZqhXXtL+KLWAyogmnR2HU82skjiJ88xBuPRbQyF8bLTufg6S9kZ1QXl9ARTSCYLXPpjklM7uIluxQjDqwXo17cN9krr8Le7Aeij37t7QcGdcy/DJrYHwyv63CIAKQFsgTp3f3ualrk7F6DzeMDZfB4+UxkX0uK6oO+mRXow6PdNja36WPblLmOOGg6r+qWEiBG1McUW/CDFaL7Qkk0KiYRqgpwhzfGIXpUyzGPUoym9/+42s3PkPJ40zPoTDK1vdcbCsKvLjfH5YebNsvifmhbkl1hixXuvflBbpOkR8t7oqqAG+vv+2zseL207SWnd7f3jduU/TNUwPN2iIymTN7LwFmj/8x3VZhUNIZi1KfIUUlaFVmo2Hh9XR4gzEeMzHnEB04NdPmEO6rIaByhrbOF07sbkIbqQyJMCuDR06ojYDmH5thhhscHXucVIl+z7FUgiXW4UHwVUUvl2ljZOfhBxDVB7OZMgKISvL5UL8q5O0/Ye+NJq/9nw0m8h7QzRViOXg2QDOE8oo9bpEe860dCTUzGEPwTUZ10pGKNAY9nWZIZ
+  template:
+    metadata:
+      name: miniflux-admin
+      namespace: miniflux
+---
+apiVersion: db.movetokube.com/v1alpha1
+kind: Postgres
+metadata:
+  name: miniflux
+  namespace: miniflux
+spec:
+  database: miniflux
+  dropOnDelete: false
+---
+apiVersion: db.movetokube.com/v1alpha1
+kind: PostgresUser
+metadata:
+  name: miniflux
+  namespace: miniflux
+spec:
+  role: miniflux
+  database: miniflux
+  secretName: miniflux-db
+  privileges: OWNER
+  secretTemplate:
+    PQ_URL: "host={{.Host}} user={{.Role}} password={{.Password}} dbname={{.Database}}"
