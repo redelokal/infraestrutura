@@ -10,7 +10,12 @@ spec:
     storageClass: vultr-block-storage-hdd-retain
   managed:
     roles:
-    - name: app
-      login: true
-      superuser: true
+      - connectionLimit: -1
+        ensure: present
+        inherit: true
+        login: true
+        name: app
+        superuser: true
+        createdb: true
+        createrole: true
 
