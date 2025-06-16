@@ -6,7 +6,6 @@ metadata:
 spec:
   acme:
     email: hello@jojo.garden
-    profile: tlsserver
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt
