@@ -8,3 +8,9 @@ spec:
   storage:
     size: 40Gi
     storageClass: vultr-block-storage-hdd-retain
+  managed:
+    roles:
+    - name: app
+      login: true
+      superuser: true
+
