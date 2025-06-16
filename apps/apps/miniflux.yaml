@@ -11,7 +11,7 @@ spec:
     repoURL: https://github.com/redelokal/infraestrutura
     path: apps/apps/miniflux
   destination:
-    namespace: minifliux
+    namespace: miniflux
     name: in-cluster
   syncPolicy:
     automated: 
