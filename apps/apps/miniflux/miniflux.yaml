@@ -64,14 +64,14 @@ kind: Ingress
 metadata:
   name: miniflux
   namespace: miniflux
-  # annotations:
-  #   cert-manager.io/cluster-issuer: letsencrypt-staging
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
   ingressClassName: nginx
-  # tls:
-  # - hosts:
-  #   - miniflux.redelokal.com.br
-  #   secretName: miniflux-tls
+  tls:
+  - hosts:
+    - miniflux.redelokal.com.br
+    secretName: miniflux-tls
   rules:
     - host: miniflux.redelokal.com.br
       http:
