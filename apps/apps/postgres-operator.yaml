@@ -18,6 +18,8 @@ spec:
           user: app
           password: rwNQnNnO2EacZhETfJ8uNblM805Iyjlf9lJGfal24GJ4wJiaLN4lfEaOccDYovwX
           default_database: app
+        env:
+          KEEP_SECRET_NAME: true
 
   destination:
     namespace: postgres-operator
