@@ -21,7 +21,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: miniflux-db
-              key: uri
+              key: PQ_URL
         - name: RUN_MIGRATIONS
           value: "1" 
         - name: CREATE_ADMIN
