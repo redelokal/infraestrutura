@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miniflux
+  namespace: miniflux
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: miniflux
+  template:
+    metadata:
+      labels:
+        app: miniflux
+    spec:
+      containers:
+      - name: miniflux
+        image: miniflux/miniflux:2.2.9
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: miniflux-db-app
+              key: uri
+        - name: RUN_MIGRATIONS
+          value: "1" 
+        - name: CREATE_ADMIN
+          value: "1"
+        - name: BASE_URL
+          value: "http://miniflux.redelokal.com.br"
+        - name: METRICS_COLLECTOR
+          value: "1"
+        - name: METRICS_ALLOWED_NETWORKS
+          value: "0.0.0.0/0"
+        - name: ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: miniflux-admin
+              key: ADMIN_USERNAME
+        - name: ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: miniflux-admin
+              key: ADMIN_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: miniflux
+  namespace: miniflux
+  labels:
+    app: miniflux
+spec:
+  selector:
+    app: miniflux
+  ports:
+    - name: web
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: miniflux
+#   namespace: miniflux
+#   annotations:
+#     cert-manager.io/cluster-issuer: letsencrypt-staging
+# spec:
+#   ingressClassName: nginx
+#   tls:
+#   - hosts:
+#     - miniflux.redelokal.com.br
+#     secretName: miniflux-tls
+#   rules:
+#     - host: miniflux.redelokal.com.br
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: miniflux
+#                 port:
+#                   number: 80
