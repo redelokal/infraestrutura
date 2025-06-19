@@ -1,25 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: miniflux
+  name: cert-manager-issuers
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/redelokal/infraestrutura.git
+    repoURL: https://github.com/redelokal/infraestrutura
+    path: charts/cert-manager-issuers
     targetRevision: HEAD
-    path: apps/apps/miniflux
-
-    helm:
-      valuesObject:
-        ingress:
-          certManager:
-            issuerName: letsencrypt
-
   destination:
-    namespace: miniflux
+    namespace: cert-manager
     name: in-cluster
   syncPolicy:
     automated: 
