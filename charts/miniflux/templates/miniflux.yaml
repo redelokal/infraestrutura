@@ -64,14 +64,20 @@ kind: Ingress
 metadata:
   name: miniflux
   namespace: miniflux
+  {{- with .Values.ingress.annotations }}
   annotations:
-    cert-manager.io/cluster-issuer: {{ .Values.ingress.certManager.issuerName }}
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ tpl (toString $value) $ | quote }}
+    {{- end }}
+  {{- end }}
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - miniflux.redelokal.com.br
-    secretName: miniflux-tls
+  {{- if .Values.ingress.tls }}
+    - hosts:
+      - {{ .Values.ingress.tls.hostname }}
+      secretName: miniflux-tls
+  {{- end }}
   rules:
     - host: miniflux.redelokal.com.br
       http:
