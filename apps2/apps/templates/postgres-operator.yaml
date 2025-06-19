@@ -12,8 +12,10 @@ spec:
     chart: ext-postgres-operator
     targetRevision: 2.0.0
     helm:
-      valueFiles:
-      - {{ .Values.postgresOperator.valuesFile }}
+      # valueFiles:
+      # - {{ .Values.postgresOperator.valuesFile }}
+      valuesObject: {{ .Values.postgresOperator }}
+
   destination:
     namespace: postgres-operator2
     name: in-cluster

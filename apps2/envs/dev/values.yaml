@@ -1,0 +1,7 @@
+myKey: myValue
+
+postgresOperator:
+  valuesFile: https://raw.githubusercontent.com/redelokal/infraestrutura/refs/heads/main/apps2/envs/dev/postgres-operator.yaml
+
+  env:
+    KEEP_SECRET: "true"

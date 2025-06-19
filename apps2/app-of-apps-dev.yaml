@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-of-apps2
+  name: app-of-apps-dev
 spec:
   destination:
     name: in-cluster
@@ -10,4 +10,7 @@ spec:
     path: apps2/apps
     repoURL: 'https://github.com/redelokal/infraestrutura'
     targetRevision: HEAD
+    helm:
+      valueFiles:
+      - ../envs/dev/values.yaml
   project: default
