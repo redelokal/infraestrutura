@@ -14,7 +14,7 @@ spec:
     targetRevision: 2.0.0
     helm:
       valueFiles:
-      - $values/apps2/envs/dev/postgres-operator.yaml
+      - $values/apps2/envs/{{ .Values.env }}/postgres-operator.yaml
     
   - repoURL: 'https://github.com/redelokal/infraestrutura'
     targetRevision: main
