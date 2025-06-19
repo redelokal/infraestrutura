@@ -7,8 +7,8 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    repoURL: https://github.com/redelokal/infraestrutura.git
+  sources:
+  - repoURL: https://github.com/redelokal/infraestrutura.git
     targetRevision: HEAD
     path: charts/miniflux
 
@@ -16,6 +16,10 @@ spec:
       valueFiles:
       - $values/app/envs/common/miniflux.yaml
       - $values/app/envs/{{ .Values.env }}/miniflux.yaml
+
+  - repoURL: 'https://github.com/redelokal/infraestrutura'
+    targetRevision: main
+    ref: values
 
   destination:
     namespace: miniflux
