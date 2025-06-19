@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/redelokal/infraestrutura
-    path: apps/apps/databases/postgresql
+    path: app/apps/databases/postgresql
   destination:
     namespace: postgresql
     name: in-cluster
