@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/redelokal/infraestrutura
     path: charts/databases/postgresql
-    targetRevision: 0.1.0
+    targetRevision: HEAD
   destination:
     namespace: postgresql
     name: in-cluster
