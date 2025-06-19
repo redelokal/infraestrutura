@@ -7,13 +7,18 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    repoURL: https://movetokube.github.io/postgres-operator
+  sources:
+
+  - repoURL: https://movetokube.github.io/postgres-operator
     chart: ext-postgres-operator
     targetRevision: 2.0.0
     helm:
-      valuesObject: 
-        {{ .Values.postgresOperator | toYaml }}
+      valueFiles:
+      - $values/apps2/envs/dev/postgres-operator.yaml
+    
+  - repoURL: 'https://github.com/redelokal/infraestrutura'
+    targetRevision: main
+    ref: values
 
   destination:
     namespace: postgres-operator2
