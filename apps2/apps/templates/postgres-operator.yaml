@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postgres-operator
+  name: postgres-operator2
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -13,10 +13,11 @@ spec:
     targetRevision: 2.0.0
     helm:
       valueFiles:
+      - {{ .Values.myKey }}
 
 
   destination:
-    namespace: postgres-operator
+    namespace: postgres-operator2
     name: in-cluster
   syncPolicy:
     automated: {}
