@@ -13,9 +13,7 @@ spec:
     targetRevision: 2.0.0
     helm:
       valueFiles:
-      - {{ .Values.myKey }}
-
-
+      - {{ .Values.postgresOperator.valuesFile }}
   destination:
     namespace: postgres-operator2
     name: in-cluster
