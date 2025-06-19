@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postgres-operator2
+  name: postgres-operator
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -14,15 +14,15 @@ spec:
     targetRevision: 2.0.0
     helm:
       valueFiles:
-      - $values/apps2/envs/common/postgres-operator-values.yaml
-      - $values/apps2/envs/{{ .Values.env }}/postgres-operator-values.yaml
+      - $values/app/envs/common/postgres-operator-values.yaml
+      - $values/app/envs/{{ .Values.env }}/postgres-operator-values.yaml
     
   - repoURL: 'https://github.com/redelokal/infraestrutura'
     targetRevision: main
     ref: values
 
   destination:
-    namespace: postgres-operator2
+    namespace: postgres-operator
     name: in-cluster
   syncPolicy:
     automated: {}

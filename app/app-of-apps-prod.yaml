@@ -2,15 +2,21 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: app-of-app-prod
+  namespace: argocd
 spec:
   destination:
     name: in-cluster
     namespace: argocd
   source:
-    path: apps2/apps
+    path: app/apps
     repoURL: 'https://github.com/redelokal/infraestrutura'
     targetRevision: HEAD
     helm:
       valueFiles:
       - ../envs/prod.yaml
   project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+

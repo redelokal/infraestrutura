@@ -6,12 +6,18 @@ Install ArgoCD CLI from the [release page](https://github.com/argoproj/argo-cd/r
 ## Bootstrap Dev
 Create a new cluster:
 ```
-kind cluster create --name redelokal-dev
+kind cluster create --name redelokal-local
+kind export kubeconfig --name redelokal-local
 ```
 
 Install ArgoCD:
 ```
 helm upgrade --install argocd argo/argo-cd --namespace argocd --create-namespace -f argocd/values.yaml --version 8.0.17
+```
+
+Create the ArgoCD app:
+```
+kubectl apply -f apps/app-of-apps-local.yaml
 ```
 
 Connect to ArgoCD:
