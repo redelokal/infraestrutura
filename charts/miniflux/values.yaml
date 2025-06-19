@@ -1,3 +1,5 @@
 ingress:
-  certManager:
-    issuerName:
+  annotations:
+    cert-manager.io/cluster-issuer: 
+  tls:
+    hostname: 
