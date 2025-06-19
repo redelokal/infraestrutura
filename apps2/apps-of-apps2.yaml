@@ -10,7 +10,4 @@ spec:
     path: apps2/apps
     repoURL: 'https://github.com/redelokal/infraestrutura'
     targetRevision: HEAD
-    helm:
-      valueFiles:
-      - ../envs/dev.yaml
   project: default
