@@ -65,7 +65,7 @@ metadata:
   name: miniflux
   namespace: miniflux
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.certManager.issuerName }}
 spec:
   ingressClassName: nginx
   tls:
