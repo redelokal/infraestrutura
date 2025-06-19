@@ -1,3 +1,5 @@
 ingress:
-  certManager:
-    issuerName: letsencrypt
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  tls:
+    hostname: miniflux.redelokal.com.br
