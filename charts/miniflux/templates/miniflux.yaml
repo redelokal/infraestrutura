@@ -103,25 +103,3 @@ spec:
     metadata:
       name: miniflux-admin
       namespace: miniflux
----
-apiVersion: db.movetokube.com/v1alpha1
-kind: Postgres
-metadata:
-  name: miniflux
-  namespace: miniflux
-spec:
-  database: miniflux
-  dropOnDelete: false
----
-apiVersion: db.movetokube.com/v1alpha1
-kind: PostgresUser
-metadata:
-  name: miniflux
-  namespace: miniflux
-spec:
-  role: miniflux
-  database: miniflux
-  secretName: miniflux-db
-  privileges: OWNER
-  secretTemplate:
-    PQ_URL: "host={{.Host}} user={{.Role}} password={{.Password}} dbname={{.Database}}"

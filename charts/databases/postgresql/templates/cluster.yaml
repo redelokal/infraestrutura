@@ -18,4 +18,3 @@ spec:
         superuser: true
         createdb: true
         createrole: true
-
