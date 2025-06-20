@@ -18,3 +18,11 @@ spec:
         superuser: true
         createdb: true
         createrole: true
+
+      - name: miniflux
+        connectionLimit: -1
+        ensure: present
+        login: true
+        superuser: false
+        passwordSecret:
+          name: miniflux-auth

@@ -15,6 +15,19 @@ Install ArgoCD:
 helm upgrade --install argocd argo/argo-cd --namespace argocd --create-namespace -f argocd/values.yaml --version 8.0.17
 ```
 
+
+Create the ArgoCD Application:
+```
+
+```
+
+Create the Miniflux Secrets:
+```
+
+```
+
+
+
 Create the ArgoCD app:
 ```
 kubectl apply -f apps/app-of-apps-local.yaml
@@ -48,6 +61,10 @@ Install the App of Apps:
 
 
 
+TODO
+- Deletar os BDs do miniflux
+- Criar banco/role miniflux manualmente e documentar
+- Alterar a secret do miniflux para incluir dados de acesso ao banco
 
 
 Delete it:
