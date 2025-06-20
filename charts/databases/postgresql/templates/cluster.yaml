@@ -27,3 +27,14 @@ spec:
         superuser: false
         passwordSecret:
           name: miniflux-auth
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: miniflux
+  namespace: postgresql
+spec:
+  name: miniflux
+  owner: miniflux
+  cluster:
+    name: postgresql-01
