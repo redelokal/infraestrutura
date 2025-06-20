@@ -20,8 +20,8 @@ spec:
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
-              name: miniflux-db
-              key: PQ_URL
+              name: miniflux-auth
+              key: DATABASE_URL
         - name: RUN_MIGRATIONS
           value: "1" 
         - name: CREATE_ADMIN
@@ -35,12 +35,12 @@ spec:
         - name: ADMIN_USERNAME
           valueFrom:
             secretKeyRef:
-              name: miniflux-admin
+              name: miniflux-auth
               key: ADMIN_USERNAME
         - name: ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: miniflux-admin
+              name: miniflux-auth
               key: ADMIN_PASSWORD
 ---
 apiVersion: v1
