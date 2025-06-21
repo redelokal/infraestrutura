@@ -7,10 +7,20 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    repoURL: https://github.com/redelokal/infraestrutura
+  sources:
+  - repoURL: https://github.com/redelokal/infraestrutura
     path: charts/databases/postgresql
     targetRevision: HEAD
+
+    helm:
+      valueFiles:
+      - $values/app/envs/common/postgresql-values.yaml
+      - $values/app/envs/{{ .Values.env }}/postgresql-values.yaml
+
+  - repoURL: 'https://github.com/redelokal/infraestrutura'
+    targetRevision: main
+    ref: values
+
   destination:
     namespace: postgresql
     name: in-cluster

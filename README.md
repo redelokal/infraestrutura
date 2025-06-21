@@ -15,17 +15,35 @@ Install ArgoCD:
 helm upgrade --install argocd argo/argo-cd --namespace argocd --create-namespace -f argocd/values.yaml --version 8.0.17
 ```
 
-
 Create the ArgoCD Application:
 ```
+kubectl apply -f app/app-of-apps-local.yaml
 
 ```
 
 Create the Miniflux Secrets:
 ```
+export MINIFLUX_ADMIN_USERNAME=stipend-anatomy-gallows-curable
+export MINIFLUX_ADMIN_PASSWORD=said-cannabis-delouse-kilometer-expulsion-fidgety
+export MINIFLUX_DB_USERNAME=miniflux
+export MINIFLUX_DB_PASSWORD=what-coffee-banana-cake-chair-trash
+export MINIFLUX_DB_DATABASE=miniflux
+export MINIFLUX_DB_HOSTNAME=postgresql-01-rw.postgresql.svc.cluster.local
 
-```
+# create secret for db
+kubectl create secret generic \
+  miniflux-auth \
+  --namespace postgresql \
+  --from-literal=username=$MINIFLUX_DB_USERNAME \
+  --from-literal=password=$MINIFLUX_DB_PASSWORD
 
+# create secret for miniflux app
+kubectl create secret generic \
+  miniflux-auth \
+  --namespace miniflux \
+  --from-literal=ADMIN_USERNAME=$MINIFLUX_ADMIN_USERNAME \
+  --from-literal=ADMIN_PASSWORD=$MINIFLUX_ADMIN_PASSWORD \
+  --from-literal=DATABASE_URL="host=$MINIFLUX_DB_HOSTNAME user=$MINIFLUX_DB_USERNAME password=$MINIFLUX_DB_PASSWORD dbname=$MINIFLUX_DB_DATABASE sslmode=disable"
 
 
 Create the ArgoCD app:
@@ -60,13 +78,6 @@ Install the App of Apps:
 ```
 
 
-
-TODO
-- Deletar os BDs do miniflux
-- Criar banco/role miniflux manualmente e documentar
-- Alterar a secret do miniflux para incluir dados de acesso ao banco
-
-
 Delete it:
 ```
 kubectl delete secret -n argocd argocd-initial-admin-secret
@@ -78,15 +89,9 @@ argocd account update-password
 # TODO
 - Longhorn
 - Metrics
-- Postgresql operator to managed databases for apps
-    - Copy correct pg password (do not hardcode)
-- Miniflux
-    - Create PostgreSQL user / database
-    - Create Miniflux deployment app with Helm
-    - Expose Miniflux on ingress
-    - Add DNS entry to Miniflux
-    - Add certificate
 - Dev env
+    - SVC TYPE LB
+    - StorageClass cnpg
 - README
 - Baixar binários
 

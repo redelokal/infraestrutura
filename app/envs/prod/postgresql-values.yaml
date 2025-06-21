@@ -1,0 +1,3 @@
+cluster:
+  storageClass: vultr-block-storage-hdd-retain
+  replicas: 2

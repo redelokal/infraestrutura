@@ -4,10 +4,10 @@ metadata:
   name: postgresql-01
   namespace: postgresql
 spec:
-  instances: 3
+  instances: {{ .Values.cluster.replicas }}
   storage:
     size: 40Gi
-    storageClass: vultr-block-storage-hdd-retain
+    storageClass: {{ .Values.cluster.storageClass }}
   managed:
     roles:
       - connectionLimit: -1

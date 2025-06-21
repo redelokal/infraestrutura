@@ -14,8 +14,8 @@ spec:
 
     helm:
       valueFiles:
-      - $values/app/envs/common/miniflux.yaml
-      - $values/app/envs/{{ .Values.env }}/miniflux.yaml
+      - $values/app/envs/common/miniflux-values.yaml
+      - $values/app/envs/{{ .Values.env }}/miniflux-values.yaml
 
   - repoURL: 'https://github.com/redelokal/infraestrutura'
     targetRevision: main

@@ -1,0 +1,3 @@
+cluster:
+  storageClass: standard
+  replicas: 1
