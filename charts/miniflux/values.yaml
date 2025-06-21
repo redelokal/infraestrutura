@@ -1,5 +1,0 @@
-ingress:
-  annotations:
-    cert-manager.io/cluster-issuer: 
-  tls:
-    hostname: 
