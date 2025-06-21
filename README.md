@@ -6,7 +6,7 @@ Install ArgoCD CLI from the [release page](https://github.com/argoproj/argo-cd/r
 ## Bootstrap Dev
 Create a new cluster:
 ```
-kind cluster create --name redelokal-local
+kind create cluster --name redelokal-local
 kind export kubeconfig --name redelokal-local
 ```
 
