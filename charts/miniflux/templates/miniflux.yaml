@@ -28,7 +28,7 @@ spec:
           value: "1"
         {{- if .Values.ingress.hostname }}
         - name: BASE_URL
-          value: {{ .Values.ingress.hostname }}
+          value: {{- if .Values.ingress.tls }} https:// {{- else }} http:// {{- end }} {{- .Values.ingress.hostname }}
         {{- end }}
         - name: METRICS_COLLECTOR
           value: "1"
