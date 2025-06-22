@@ -15,7 +15,6 @@ spec:
     namespace: cnpg
     name: in-cluster
   syncPolicy:
-    automated: {}
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true

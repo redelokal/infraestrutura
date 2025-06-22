@@ -18,37 +18,31 @@ helm upgrade --install argocd argo/argo-cd --namespace argocd --create-namespace
 Create the ArgoCD Application:
 ```
 kubectl apply -f app/app-of-apps-local.yaml
-
 ```
 
 Create the Miniflux Secrets:
 ```
-export MINIFLUX_ADMIN_USERNAME=stipend-anatomy-gallows-curable
-export MINIFLUX_ADMIN_PASSWORD=said-cannabis-delouse-kilometer-expulsion-fidgety
-export MINIFLUX_DB_USERNAME=miniflux
-export MINIFLUX_DB_PASSWORD=what-coffee-banana-cake-chair-trash
-export MINIFLUX_DB_DATABASE=miniflux
-export MINIFLUX_DB_HOSTNAME=postgresql-01-rw.postgresql.svc.cluster.local
+export MINIFLUX_ADMIN_USERNAME=<username>
+export MINIFLUX_ADMIN_PASSWORD=<password>
+export MINIFLUX_DB_USERNAME=miniflux # hardcoded
+export MINIFLUX_DB_PASSWORD=<db-password>
+export MINIFLUX_DB_DATABASE=miniflux # hardcoded
+export MINIFLUX_DB_HOSTNAME=postgresql-01-rw.postgresql.svc.cluster.local # hardcoded
 
-# create secret for db
+# Create the Secret for the database
 kubectl create secret generic \
   miniflux-auth \
   --namespace postgresql \
   --from-literal=username=$MINIFLUX_DB_USERNAME \
   --from-literal=password=$MINIFLUX_DB_PASSWORD
 
-# create secret for miniflux app
+# Create the Secret for the application
 kubectl create secret generic \
   miniflux-auth \
   --namespace miniflux \
   --from-literal=ADMIN_USERNAME=$MINIFLUX_ADMIN_USERNAME \
   --from-literal=ADMIN_PASSWORD=$MINIFLUX_ADMIN_PASSWORD \
   --from-literal=DATABASE_URL="host=$MINIFLUX_DB_HOSTNAME user=$MINIFLUX_DB_USERNAME password=$MINIFLUX_DB_PASSWORD dbname=$MINIFLUX_DB_DATABASE sslmode=disable"
-
-
-Create the ArgoCD app:
-```
-kubectl apply -f apps/app-of-apps-local.yaml
 ```
 
 Connect to ArgoCD:

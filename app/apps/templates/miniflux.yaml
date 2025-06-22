@@ -25,8 +25,6 @@ spec:
     namespace: miniflux
     name: in-cluster
   syncPolicy:
-    automated: 
-      selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
