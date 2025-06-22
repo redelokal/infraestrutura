@@ -26,8 +26,10 @@ spec:
           value: "1" 
         - name: CREATE_ADMIN
           value: "1"
+        {{- if .Values.ingress.hostname }}
         - name: BASE_URL
-          value: "http://miniflux.redelokal.com.br"
+          value: {{ .Values.ingress.hostname }}
+        {{- end }}
         - name: METRICS_COLLECTOR
           value: "1"
         - name: METRICS_ALLOWED_NETWORKS
