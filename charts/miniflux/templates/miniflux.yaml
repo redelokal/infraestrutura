@@ -79,7 +79,7 @@ spec:
       secretName: miniflux-tls
   {{- end }}
   rules:
-    - host: miniflux.redelokal.com.br
+    - host: {{ .Values.ingress.hostname }}
       http:
         paths:
           - path: /
